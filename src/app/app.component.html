@@ -1,4 +1,4 @@
-<mat-toolbar class="bg-gradient-to-r from-cyan-500 to-blue-500  text-white">
+<mat-toolbar class="bg-gradient-to-r from-cyan-700 to-blue-500  text-white shadow-2xl">
   <mat-toolbar-row>
     <button mat-icon-button>
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
@@ -7,9 +7,11 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container>
-    <mat-sidenav #sidenav opened="false">
-      <mat-nav-list class="">
-          <a mat-list-item>Home</a>
+    <mat-sidenav #sidenav opened="false" class="w-60 text-center">
+      <mat-nav-list class="" *ngFor="let link of links" class="hover:bg-cyan-700 transition-all">
+          <a mat-list-item class="hover:text-white" routerLink="{{link.url}}" (click)="sidenav.toggle()">
+            {{ link.name }}
+          </a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
