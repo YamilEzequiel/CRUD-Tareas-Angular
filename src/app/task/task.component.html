@@ -1,1 +1,59 @@
-<p>task works!</p>
+<div class="p-10 text-center md:flex">
+
+  <div class="bg-gradient-to-r from-cyan-700 to-blue-500  text-white shadow-2xl p-8 m-4 rounded md:w-96 h-96">
+    <!-- Al ejecutarlo el localhost lo realiza demaciado rapido
+      <mat-spinner *ngIf="spinner" class="mat-spinner-color text-center absolute mx-auto"></mat-spinner>
+    -->
+    <div>
+      <p class="bg-white text-black p-2 m-2 rounded shadow-xl text-xl">Crear nueva Tarea</p>
+      <form [formGroup]='taskForm' (ngSubmit)="createTask()" >
+          <label>
+            <input formControlName="title" placeholder="Titulo de la tarea" class="p-2 mt-2 rounded shadow-l w-full text-black">
+            <p class="bg-red-600 p-2 mts-2 w-full text-white  rounded"  *ngIf="errorHandling('title','minlength')">
+              Titulo min 6 caracteres
+            </p>
+            <p class="bg-red-600 p-2 mts-2 w-full text-white  rounded"  *ngIf="errorHandling('title','maxlength')">
+              Titulo max 20 caracteres
+            </p>
+          </label>
+          <label>
+            <input formControlName="description" placeholder="Description de la tarea" class="p-2 mt-2 rounded shadow-l w-full text-black">
+            <p class="bg-red-600 p-2 mts-2 w-full text-white  rounded"  *ngIf="errorHandling('description','minlength')">
+              Desc min 6 caracteres
+            </p>
+            <p class="bg-red-600 p-2 mts-2 w-full text-white  rounded"  *ngIf="errorHandling('description','maxlength')">
+              Desc max 300 caracteres
+            </p>
+          </label>
+          <button type="submit" [disabled]="!taskForm.valid && !spinner"
+            class="bg-gradient-to-r from-green-500 via-green-800 to-green-600 p-4 mt-4 relative text-white rounded shadow-xl w-full">
+            <span>{{ButtonTask}}</span>
+          </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="w-full">
+    <div *ngIf="tasks.length<=0" class="text-xl ">
+      No se encontraron tareas
+    </div>
+    <div *ngFor="let task of tasks;let i = index"
+      [ngClass]="{'scale-in-center': i === 0 && postInit}"
+      class="bg-gradient-to-r from-cyan-700 to-blue-500  text-white shadow-2xl p-4 m-4 rounded ">
+      <h1>{{task.title}}</h1> {{i}}
+      <br>
+      {{task.description}}
+      <div class="flex justify-end relative">
+        <button (click)="editTasks(task)" type="button"
+        class="bg-green-400 hover:bg-green-800 shadow-xl rounded p-4 m-2 transition-all duration-100 ease-in-out">
+          Editar
+        </button>
+        <button (click)="deleteTask(task.id)"
+        class="bg-red-400 hover:bg-red-800 shadow-xl rounded p-4 m-2 transition-all duration-100 ease-in-out">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

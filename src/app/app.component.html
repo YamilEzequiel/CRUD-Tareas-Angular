@@ -8,7 +8,7 @@
 </mat-toolbar>
 <mat-sidenav-container>
     <mat-sidenav #sidenav opened="false" class="w-60 text-center">
-      <mat-nav-list class="" *ngFor="let link of links" class="hover:bg-cyan-700 transition-all">
+      <mat-nav-list class="" *ngFor="let link of links" class="hover:bg-cyan-700 transition ease-in-out duration-500">
           <a mat-list-item class="hover:text-white" routerLink="{{link.url}}" (click)="sidenav.toggle()">
             {{ link.name }}
           </a>
